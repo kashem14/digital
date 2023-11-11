@@ -1,0 +1,109 @@
+
+/**
+ * toggle navbar
+ */
+
+// const navbar = document.querySelector("[data-navbar]");
+// const navbarLinks = document.querySelectorAll("[data-nav-link]");
+// const navToggler = document.querySelector("[data-nav-toggler]");
+
+// const toggleNavbar = function () {
+//   navbar.classList.toggle("active");
+//   navToggler.classList.toggle("active");
+// }
+
+// addEventOnElem(navToggler, "click", toggleNavbar);
+
+// const closeNavbar = function () {
+//   navbar.classList.remove("active");
+//   navToggler.classList.remove("active");
+// }
+
+// addEventOnElem(navbarLinks, "click", closeNavbar);
+
+
+
+
+/**
+ * header active
+ */
+
+// const header = document.querySelector("[data-header]");
+// const backTopBtn = document.querySelector("[data-back-top-btn]");
+
+// window.addEventListener("scroll", function () {
+//   if (window.scrollY > 100) {
+//     header.classList.add("active");
+//     backTopBtn.classList.add("active");
+//   } else {
+//     header.classList.remove("active");
+//     backTopBtn.classList.remove("active");
+//   }
+// });
+
+
+
+
+/*Portfolio section starts*/
+$(document).ready(function(){
+  /*mixitup*/
+  var container = document.querySelector('.gallery');
+  var mixer = mixitup(container,{
+    selectors : {
+      control : '[mixcontrol]'
+    }
+  });
+})
+/*Portfolio section ends*/
+
+
+/*Testimonial section starts*/
+
+const testimonials = document.querySelectorAll('.testimonial');
+const dots = document.querySelectorAll('.dot');
+let currentTestimonialIndex = 0;
+
+function swapTestimonials(index) {
+  const currentTestimonial = testimonials[currentTestimonialIndex];
+  const nextTestimonial = testimonials[index];
+
+  currentTestimonial.parentNode.insertBefore(nextTestimonial, currentTestimonial);
+
+  currentTestimonialIndex = index;
+  setActiveDot(currentTestimonialIndex);
+}
+
+function setActiveDot(index) {
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+function startTestimonialRotation() {
+  setActiveDot(currentTestimonialIndex);
+  swapTestimonials(currentTestimonialIndex);
+  setInterval(() => {
+    const nextIndex = (currentTestimonialIndex + 1) % testimonials.length;
+    swapTestimonials(nextIndex);
+  }, 5000);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      swapTestimonials(index);
+    });
+  });
+}
+
+startTestimonialRotation();
+/*Testimonial section Ends*/
+
+
+// testimonial start
+
+// $(document).ready(function(){
+//   $('.carousel').slick({
+//   slidesToShow: 3,
+//   dots:true,
+//   centerMode: true,
+//   });
+// });
